@@ -484,7 +484,7 @@ paths:
       summary: "Delete an Item of a user"
       operationId: "DeleteItem"
       tags:
-        - "Lists"
+        - "Items"
       description: "This endpoint allows user to delete an item"
       consumes:
         - "application/json"
