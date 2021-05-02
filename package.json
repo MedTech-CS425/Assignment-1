@@ -19,6 +19,9 @@
   },
   "homepage": "https://github.com/MedTech-CS425/Assignment-1#readme",
   "dependencies": {
-    "nodemon": "^2.0.7"
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7",
+    "swagger-ui-express": "^4.1.6",
+    "yamljs": "^0.3.0"
   }
 }
