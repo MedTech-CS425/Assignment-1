@@ -1,0 +1,24 @@
+{
+  "name": "assignment-1",
+  "version": "1.0.0",
+  "description": "In this Assignment You need to code your own server using ExpressJS.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "start-dev": "nodemon",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MedTech-CS425/Assignment-1.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MedTech-CS425/Assignment-1/issues"
+  },
+  "homepage": "https://github.com/MedTech-CS425/Assignment-1#readme",
+  "dependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
