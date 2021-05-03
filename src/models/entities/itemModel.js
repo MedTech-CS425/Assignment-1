@@ -1,17 +1,14 @@
 const mongoose = require('mongoose');
 
 const ItemSchema = new mongoose.Schema({
-    id: {
-        type: integer
-    },
     name: {
         type: String
     },
-    categoryId: {
-        type: integer
+    category: {
+        type: mongoose.Types.ObjectId
     },
-    userId: {
-        type: integer
+    user: {
+        type: mongoose.Types.ObjectId
     },
     note: {
         type: String
@@ -20,11 +17,11 @@ const ItemSchema = new mongoose.Schema({
         type: String
     },
     createdAt: {
-        type: String
+        type: Date
     },
     updatedAt: {
-        type: String
+        type: Date
     }
 });
 
-module.exports('Item', ItemSchema);
+module.exports = mongoose.model('Item', ItemSchema);
