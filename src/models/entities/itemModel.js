@@ -7,10 +7,13 @@ const ItemSchema = new mongoose.Schema({
     },
     category: {
         type: mongoose.Types.ObjectId,
+        ref: 'Category',
         required: true
     },
     user: {
-        type: mongoose.Types.ObjectId
+        type: mongoose.Types.ObjectId,
+        ref: 'User',
+        required: true
     },
     note: {
         type: String,

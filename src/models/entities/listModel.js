@@ -2,11 +2,18 @@ const mongoose = require('mongoose');
 
 const ListSchema = new mongoose.Schema({
     name: {
-        type: String
+        type: String,
+        required: true
     },
     user: {
-        type: mongoose.Types.ObjectId
+        type: mongoose.Types.ObjectId,
+        ref: 'User',
+        required: true
     },
+    items: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'Item'
+    }]
 },
     {
         timestamps: {
