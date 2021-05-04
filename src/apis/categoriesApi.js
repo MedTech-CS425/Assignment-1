@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 class CategoriesApi {
     async getCategories(req, res, next) {
         try {
-            const categories = await CategoryModel.find({ user: req.userId });
+            const categories = await CategoryModel.find({ user_id: req.userId });
             res.status(201).json(categories);
         } catch (error) {
             next(error);

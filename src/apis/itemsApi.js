@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 class ItemsApi {
     async getItems(req, res, next) {
         try {
-            const items = await ItemModel.find({ user: req.userId });
+            const items = await ItemModel.find({ user_id: req.userId });
             res.status(201).json(items);
         } catch (error) {
             next(error);
