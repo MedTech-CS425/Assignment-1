@@ -38,6 +38,15 @@ app.put('/categories/:category_id', authMiddleware.authorize, categoriesApi.upda
 
 app.delete('/categories/:category_id', authMiddleware.authorize, categoriesApi.deleteCategory);
 
+// Items routes
+app.get('/items', authMiddleware.authorize, itemsApi.getItems);
+
+app.post('/items', authMiddleware.authorize, itemsApi.createItem);
+
+app.put('/items/:item_id', authMiddleware.authorize, itemsApi.updateItem);
+
+app.delete('/items/:item_id', authMiddleware.authorize, itemsApi.deleteItem);
+
 app.use((err, req, res, next) => {
     res.status(500).json(new Error(err.message));
   });
