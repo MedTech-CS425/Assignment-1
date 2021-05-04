@@ -4,6 +4,9 @@ app.use(express.json());
 const mongoose = require('mongoose');
 const authApi = require('./src/apis/authApi');
 const authMiddleware = require('./src/middlewares/authMiddleware');
+const categoriesApi = require('./src/apis/categoriesApi');
+const itemsApi = require('./src/apis/itemsApi');
+const listsApi = require('./src/apis/listsApi');
 const Error = require('./src/models/responses/error');
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
@@ -19,12 +22,22 @@ mongoose.connection.once('open', function() {
     console.log("Connection to DB established");
 })
 
+//Auth routes
 app.post('/signup', authApi.signUp);
 
 app.post('/login', authApi.login);
 
 app.get('/getUser', authMiddleware.authorize , authApi.getUser);
- 
+
+// Categories routes
+app.get('/categories', authMiddleware.authorize, categoriesApi.getCategories);
+
+app.post('/categories', authMiddleware.authorize, categoriesApi.createCategory);
+
+app.put('/categories/:category_id', authMiddleware.authorize, categoriesApi.updateCategory);
+
+app.delete('/categories/:category_id', authMiddleware.authorize, categoriesApi.deleteCategory);
+
 app.use((err, req, res, next) => {
     res.status(500).json(new Error(err.message));
   });
