@@ -22,24 +22,22 @@ class AuthApi {
             }
             const token = jwt.sign({ id: user._id }, secret);
             res.status(201).json({ user, token });
-        } catch(error) {
+        } catch (error) {
             next(error)
-        }  
+        }
     }
 
     async signUp(req, res, next) {
         try {
             const user = new UserModel(req.body);
-            let error = user.validateSync();
-            if(error) {
-                const errorField = Object.keys(error.errors)[0];
-                return res.status(422).json(new ValidationError(error.errors[errorField].path, error.errors[errorField].message));    
-            }
+            const validationError = validateModel(user);
+            if (validationError)
+                return res.status(422).json(validationError);
             user.password = await bcrypt.hash(req.body.password, 12);
             await user.save();
             res.status(201).json({});
         } catch (error) {
-           next(error);
+            next(error);
         }
     }
 
@@ -50,9 +48,9 @@ class AuthApi {
                 return res.status(404).json(new Error("User not found"));
             }
             res.json({ email: user.email, password: user.password, userName: user.userName });
-        } catch(error) {
+        } catch (error) {
             next(error);
-        } 
+        }
     }
 }
 
