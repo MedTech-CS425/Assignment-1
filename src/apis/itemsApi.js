@@ -16,13 +16,12 @@ class ItemsApi {
         try {
             const item = new ItemModel(req.body);
             item.user = mongoose.Types.ObjectId(req.userId);
-            const error = item.validateSync();
-            if (error) {
-                const errorField = Object.keys(error.errors)[0];
-                return res.status(422).json(new ValidationError(error.errors[errorField].path, error.errors[errorField].message));
-            }
+            item.category = mongoose.Types.ObjectId(req.body.category);
+            const validationError = validateModel(item);
+            if (validationError)
+                return res.status(422).json(validationError);
             await item.save();
-            res.status(200).json(item);
+            res.status(201).json(item);
         } catch (error) {
             next(error);
         }
@@ -32,10 +31,15 @@ class ItemsApi {
         try {
             const item = await ItemModel.findById(req.params.item_id);
             if (!item) {
-                return res.status(404).json(new Error("item not found"));
+                return res.status(404).json(new Error("Item not found"));
             }
             item.name = req.body.name;
-            
+            item.image = req.body.image;
+            item.category = mongoose.Types.ObjectId(req.body.category);
+            item.note = req.body.note;
+            const validationError = validateModel(item);
+            if (validationError)
+                return res.status(422).json(validationError);
             await item.save();
             res.status(201).json(item);
         } catch (error) {
@@ -47,7 +51,7 @@ class ItemsApi {
         try {
             await ItemModel.findByIdAndDelete(req.params.item_id);
             res.json({});
-        } catch(error) {
+        } catch (error) {
             next(error);
         }
     }
