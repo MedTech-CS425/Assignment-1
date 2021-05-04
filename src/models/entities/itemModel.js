@@ -2,19 +2,23 @@ const mongoose = require('mongoose');
 
 const ItemSchema = new mongoose.Schema({
     name: {
-        type: String
+        type: String,
+        required: true
     },
     category: {
-        type: mongoose.Types.ObjectId
+        type: mongoose.Types.ObjectId,
+        required: true
     },
     user: {
         type: mongoose.Types.ObjectId
     },
     note: {
-        type: String
+        type: String,
+        required: true
     },
     image: {
-        type: String
+        type: String,
+        required: true
     },
 },
     {
