@@ -13,7 +13,7 @@ router.post("/login",async (req,res)=>{
 })
 router.post("/register",async (req,res)=>{
   try {
-    const result=await userService.register({email:req.body.email,password:req.body.password,userName:req.body.userName})
+    await userService.register({email:req.body.email,password:req.body.password,userName:req.body.userName})
     res.sendStatus(201);
   } catch (error) {
     console.log(error);

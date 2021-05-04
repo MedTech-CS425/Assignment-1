@@ -1,7 +1,7 @@
 const mongoose=require('mongoose');
 module.exports=()=>{
 const uri=process.env.mongoUri || "mongodb://localhost:27017/assignement1"
-mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true,useCreateIndex: true}).catch(err=>console.log(err));
+mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true,useCreateIndex: true,useFindAndModify: false}).catch(err=>console.log(err));
 
 mongoose.connection.on('connected', function () {
   console.log('Database connection established!');
