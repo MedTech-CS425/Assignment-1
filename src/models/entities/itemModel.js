@@ -16,12 +16,12 @@ const ItemSchema = new mongoose.Schema({
     image: {
         type: String
     },
-    createdAt: {
-        type: Date
-    },
-    updatedAt: {
-        type: Date
-    }
-});
+},
+    {
+        timestamps: {
+            createdAt: "created_at",
+            updatedAt: "updated_at"
+        }
+    });
 
 module.exports = mongoose.model('Item', ItemSchema);

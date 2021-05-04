@@ -1,18 +1,18 @@
 const mongoose = require('mongoose');
 
 const ListSchema = new mongoose.Schema({
-name: {
-    type: String
+    name: {
+        type: String
+    },
+    user: {
+        type: mongoose.Types.ObjectId
+    },
 },
-user: {
-    type: mongoose.Types.ObjectId
-},
-createdAt: {
-    type: Date
-},
-updatedAt: {
-    type: Date
-}
-});
+    {
+        timestamps: {
+            createdAt: "created_at",
+            updatedAt: "updated_at"
+        }
+    });
 
 module.exports = mongoose.model('List', ListSchema);
