@@ -15,8 +15,8 @@ class ItemsApi {
     async createItem(req, res, next) {
         try {
             const item = new ItemModel(req.body);
-            item.user = mongoose.Types.ObjectId(req.userId);
-            item.category = mongoose.Types.ObjectId(req.body.category);
+            item.user_id = mongoose.Types.ObjectId(req.userId);
+            item.category_id = mongoose.Types.ObjectId(req.body.category_id);
             const validationError = validateModel(item);
             if (validationError)
                 return res.status(422).json(validationError);
@@ -35,7 +35,7 @@ class ItemsApi {
             }
             item.name = req.body.name;
             item.image = req.body.image;
-            item.category = mongoose.Types.ObjectId(req.body.category);
+            item.category_id = mongoose.Types.ObjectId(req.body.category_id);
             item.note = req.body.note;
             const validationError = validateModel(item);
             if (validationError)

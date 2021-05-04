@@ -15,7 +15,7 @@ class CategoriesApi {
     async createCategory(req, res, next) {
         try {
             const category = new CategoryModel(req.body);
-            category.user = mongoose.Types.ObjectId(req.userId);
+            category.user_id = mongoose.Types.ObjectId(req.userId);
             const validationError = validateModel(category);
             if (validationError)
                 return res.status(422).json(validationError);

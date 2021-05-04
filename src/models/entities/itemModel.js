@@ -5,12 +5,12 @@ const ItemSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    category: {
+    category_id: {
         type: mongoose.Types.ObjectId,
         ref: 'Category',
         required: true
     },
-    user: {
+    user_id: {
         type: mongoose.Types.ObjectId,
         ref: 'User',
         required: true
