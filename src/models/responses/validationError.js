@@ -1,6 +1,6 @@
 class validationError {
     constructor(field, message) {
-        this.status = "error";
+        this.status = 'error';
         this.field = field;
         this.message = message;
     }

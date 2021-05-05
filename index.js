@@ -13,13 +13,13 @@ const YAML = require('yamljs');
 const swaggerDocument = YAML.load('./api.yml');
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-mongoose.connect("mongodb://localhost:27017/assignment-1", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://localhost:27017/assignment-1', { useNewUrlParser: true, useUnifiedTopology: true });
 
 mongoose.connection.on('error', function () {
-    console.error("Connection error");
+    console.error('Connection error');
 })
 mongoose.connection.once('open', function () {
-    console.log("Connection to DB established");
+    console.log('Connection to DB established');
 })
 
 //Auth routes
@@ -70,5 +70,5 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(3000, () => {
-    console.log("Listening on Port 3000");
+    console.log('Listening on Port 3000');
 })

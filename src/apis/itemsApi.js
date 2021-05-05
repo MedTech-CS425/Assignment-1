@@ -31,7 +31,7 @@ class ItemsApi {
         try {
             const item = await ItemModel.findById(req.params.item_id);
             if (!item) {
-                return res.status(404).json(new Error("Item not found"));
+                return res.status(404).json(new Error('Item not found'));
             }
             item.name = req.body.name;
             item.image = req.body.image;

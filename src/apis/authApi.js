@@ -13,14 +13,18 @@ class AuthApi {
         try {
             const loginRequest = new LoginRequest(req.body.email, req.body.password);
             const error = loginRequest.validate();
-            if(error !== null) {
+            if (error !== null) {
                 return res.status(422).json(error);
             }
-            const user = (await UserModel.findOne({ email: req.body.email })).toObject();
+            let user = await UserModel.findOne({ email: req.body.email });
+            if(!user) {
+                return res.status(401).json(new Error('Invalid credentials'));
+            }
             const match = await bcrypt.compare(req.body.password, user.password);
             if (!match) {
-                res.status(401).json(new Error('Invalid credentials'));
+                return res.status(401).json(new Error('Invalid credentials'));
             }
+            user = user.toObject();
             const token = jwt.sign({ id: user._id }, secret);
             res.status(201).json(new LoginResponse(user, token));
         } catch (error) {

@@ -30,7 +30,7 @@ class CategoriesApi {
         try {
             const category = await CategoryModel.findById(req.params.category_id);
             if (!category) {
-                return res.status(404).json(new Error("Category not found"));
+                return res.status(404).json(new Error('Category not found'));
             }
             category.name = req.body.name;
             const validationError = validateModel(category);
