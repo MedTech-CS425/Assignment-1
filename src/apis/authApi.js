@@ -2,28 +2,29 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const UserModel = require('../models/entities/userModel');
 const Error = require('../models/responses/error');
-const ValidationError = require('../models/responses/validationError');
+const validateModel = require('../utils/validateModel');
 const secret = require('../consts/secret');
+const LoginResponse = require('../models/responses/loginResponse');
+const LoginRequest = require('../models/requests/loginRequest');
 
 class AuthApi {
 
     async login(req, res, next) {
         try {
-            if (!req.body.email) {
-                return res.status(422).json(new ValidationError("email", "Missing email is required"));
-            }
-            if (!req.body.password) {
-                return res.status(422).json(new ValidationError("password", "Missing password is required"));
+            const loginRequest = new LoginRequest(req.body.email, req.body.password);
+            const error = loginRequest.validate();
+            if(error !== null) {
+                return res.status(422).json(error);
             }
             const user = (await UserModel.findOne({ email: req.body.email })).toObject();
             const match = await bcrypt.compare(req.body.password, user.password);
             if (!match) {
-                res.status(401).json(new Error("Invalid credentials"));
+                res.status(401).json(new Error('Invalid credentials'));
             }
             const token = jwt.sign({ id: user._id }, secret);
-            res.status(201).json({ user, token });
+            res.status(201).json(new LoginResponse(user, token));
         } catch (error) {
-            next(error)
+            next(error);
         }
     }
 
@@ -45,7 +46,7 @@ class AuthApi {
         try {
             const user = await UserModel.findById(req.userId);
             if (!user) {
-                return res.status(404).json(new Error("User not found"));
+                return res.status(404).json(new Error('User not found'));
             }
             res.json({ email: user.email, password: user.password, userName: user.userName });
         } catch (error) {
