@@ -10,7 +10,8 @@ if (dev) {
 app.use(express.json());
 app.use('/api',require("./routes/auth"));
 app.use('/api',require("./routes/list"));
-
+app.use('/api',require("./routes/item"));
+app.use('/api',require("./routes/category"));
 
 
 
