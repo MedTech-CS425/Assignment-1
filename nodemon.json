@@ -1,0 +1,5 @@
+{
+    "env": {
+        "MONGODB_URI" : "mongodb+srv://Karim:LaKrim@123@cluster0.sgoys.mongodb.net/test" 
+    }
+}
