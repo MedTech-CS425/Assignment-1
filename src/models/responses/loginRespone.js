@@ -3,4 +3,4 @@ class loginResponse {
         this.user = user;
         this.token = token;
     }
- }
+}
