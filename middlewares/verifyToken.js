@@ -7,7 +7,7 @@ const verifyToken = (req, res, next) => {
     req.decodedToken=decodedToken;
     next();
   } catch (error) {
-    res.send('You are not authorized');
+    res.sendStatus(401);
   }
 }
 
