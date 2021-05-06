@@ -20,7 +20,7 @@ class CategoriesApi {
             if (validationError)
                 return res.status(422).json(validationError);
             await category.save();
-            res.status(201).json(category);
+            res.json(category);
         } catch (error) {
             next(error);
         }

@@ -21,7 +21,7 @@ class ItemsApi {
             if (validationError)
                 return res.status(422).json(validationError);
             await item.save();
-            res.status(201).json(item);
+            res.json(item);
         } catch (error) {
             next(error);
         }
