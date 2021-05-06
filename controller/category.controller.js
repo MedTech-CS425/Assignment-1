@@ -5,7 +5,6 @@ const Category = require("../models/category.model");
 
 module.exports.createCategory = async (req, res, next) => {
     var category = new Category();
-    category.id = req.body.id;
     category.name = req.body.name;
     category.created_at = req.body.created_at;
     category.updated_at = req.body.updated_at;
@@ -18,11 +17,11 @@ module.exports.createCategory = async (req, res, next) => {
     });
   };
   module.exports.getCategory  = (req, res, next) => {
-    Category .findOne({ user_id: req._id }, (err, category ) => {
+    Category .find({ user_id: req._id }, (err, category ) => {
       if (category )
         return res
           .status(200)
-          .json({ status: true, user: _.pick(category , ["name"]) });
+          .json({ status: true, category} );
       else
         return res.status(404).json({ status: false, message: "category  not found" });
     });
@@ -31,6 +30,8 @@ module.exports.createCategory = async (req, res, next) => {
     Category .findOneAndUpdate(
       { _id: req.params.id },
       { $set: { name: req.body.name } },
+      { $set:{note:req.body.note}},
+      { $set:{image: req.body.image} },
       function(error, success) {
         if (error) {
           res.status(404).json({ status: false });
