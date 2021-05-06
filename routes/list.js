@@ -12,16 +12,27 @@ router.get('/lists',verifyToken,async(req,res)=>{
     const lists=await listService.getListByUserId(req.decodedToken.id);
     res.status(201).send(lists);
   }catch (error) {
-    console.error(error);
+       res.send(error)
+
   }
 });
 router.post('/lists',verifyToken,async(req,res)=>{
+  try {
     await listService.addList(req.body,req.decodedToken.id);
     res.sendStatus(201);
+  } catch (error) {
+     res.send(error);
+  }
+    
 })
 router.put('/lists/:listId',verifyToken,async(req,res)=>{
-  await listService.updateList(req.body,req.params.listId);
+  try {
+     await listService.updateList(req.body,req.params.listId);
   res.sendStatus(200);
+  } catch (error) {
+     res.send(error);
+  }
+ 
 })
 router.delete('/lists/:listId',verifyToken,async(req,res)=>{
   try {
@@ -35,7 +46,34 @@ router.delete('/lists/:listId',verifyToken,async(req,res)=>{
 
 })
 router.get('/lists/:listId/items',async(req,res)=>{
-  await listService.getItemsOfList(req.params.listId);//cannot debug until i add items
+  try {
+     await listService.getItemsOfList(req.params.listId);//cannot debug until i add items
   res.send("ok")
+  } catch (error) {
+     res.send(error);
+  }
+ 
+})
+
+router.post('/lists/:listId/items',async(req,res)=>{
+  try {
+    let result=await listService.addItemToList(req.params.listId,req.body.itemId);
+  res.send(result);
+  } catch (error) {
+     res.send(error);
+  }
+  
+})
+//change item in list ? create new item? change for all references?
+//anti pattern but okay i am tired
+router.put('/lists/:listId/items',async(req,res)=>{
+  try {
+     let {itemId,...rest}=req.body;
+  let result= await listService.updateItemFromList(req.params.listId,itemId,rest);
+  res.send(result);
+  } catch (error) {
+    res.send(error);
+  }
+ 
 })
 module.exports=router;

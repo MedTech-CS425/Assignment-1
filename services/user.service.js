@@ -19,11 +19,11 @@ module.exports={
                    user:user,
                    token:token
                };
-               console.log(reponse);
+              
 
                return reponse;
             }else
-                console.log("u out");
+                throw new Error(401);
             
         }
     },

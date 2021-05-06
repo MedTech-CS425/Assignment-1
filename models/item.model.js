@@ -28,4 +28,9 @@ const itemSchema=mongoose.Schema({
         default:Date.now()
     }
 });
+itemSchema.post('remove',itemId=>{
+ let cleanUp=require("../middlewares/cleanUp");
+ cleanUp(itemId);
+ //still doesnt work
+})
 module.exports=mongoose.model('item',itemSchema)

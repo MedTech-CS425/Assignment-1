@@ -7,7 +7,7 @@ const verifyToken = (req, res, next) => {
     req.decodedToken=decodedToken;
     next();
   } catch (error) {
-    res.sendStatus(401);
+   res.status(401).send({status:401,message:"Unauthorized"});
   }
 }
 

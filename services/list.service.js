@@ -1,4 +1,5 @@
 const List=require('../models/list.model');
+const itemService=require("./item.service")
 async function findList(id){
     return await List.findById(id)
 }
@@ -19,8 +20,18 @@ module.exports={
     },
     getItemsOfList:async(listId)=>{
         const items=await findList(listId);
-        items.populate();
-        console.log(items);
+        return await items.populate('items');
+        
+    },
+    addItemToList:async(listId,itemId)=>{
+        const list=await List.findById(listId);
+        list.items.push(itemId);
+        list.updatedAt=Date.now();
+        return await list.save();
+    },
+    //updates item directly anti-pattern yes but its okay
+    updateItemFromList:async(listId,itemId,modifs)=>{
+        return await itemService.modidyItem( itemId,modifs);
     }
 
 }
