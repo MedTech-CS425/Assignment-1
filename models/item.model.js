@@ -30,7 +30,7 @@ const itemSchema=mongoose.Schema({
 });
 itemSchema.post('remove',itemId=>{
  let cleanUp=require("../middlewares/cleanUp");
- cleanUp(itemId);
+ cleanUp(itemId._id);
  //still doesnt work
 })
 module.exports=mongoose.model('item',itemSchema)
