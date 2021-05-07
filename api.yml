@@ -12,36 +12,36 @@ info:
 host: "localhost:3000"
 basePath: "/api"
 tags:
-- name: "Auth"
-  description: "Everything about Authentication"
-- name: "Lists"
-  description: "Access to Storify Lists"
-- name: "Items"
-  description: "Operations about Items"
-- name: "Categories"
-  description: "Operations about Items"
+  - name: "Auth"
+    description: "Everything about Authentication"
+  - name: "Lists"
+    description: "Access to Storify Lists"
+  - name: "Items"
+    description: "Operations about Items"
+  - name: "Categories"
+    description: "Operations about Items"
 schemes:
-- "https"
-- "http"
+  - "https"
+  - "http"
 paths:
   /login:
     post:
       tags:
-      - "Auth"
+        - "Auth"
       summary: "Authenticate a user to your Platform"
       description: ""
       operationId: "login"
       consumes:
-      - "application/json"
+        - "application/json"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - in: "body"
-        name: "body"
-        description: "User Credentials"
-        required: true
-        schema:
-          $ref: "#/definitions/LoginRequest"
+        - in: "body"
+          name: "body"
+          description: "User Credentials"
+          required: true
+          schema:
+            $ref: "#/definitions/LoginRequest"
       responses:
         201:
           description: "successful operation"
@@ -56,13 +56,13 @@ paths:
   /signup:
     post:
       tags:
-      - "Auth"
+        - "Auth"
       summary: "Registering a User"
       operationId: "signup"
       consumes:
-      - "application/json"
+        - "application/json"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
         - in: "body"
           name: "body"
@@ -81,13 +81,13 @@ paths:
     get:
       operationId: "getUser"
       summary: "Get the connected user informations"
-      tags: 
-      - "Auth"
+      tags:
+        - "Auth"
       responses:
         200:
           description: "Success"
           schema:
-           $ref: "#/definitions/User"
+            $ref: "#/definitions/User"
         401:
           $ref: "#/responses/401"
         404:
@@ -95,8 +95,8 @@ paths:
         500:
           $ref: "#/responses/500"
       security:
-       - basicAuth: []
-  
+        - basicAuth: []
+
   /lists:
     get:
       summary: "Fetch all the connected user lists"
@@ -115,8 +115,8 @@ paths:
         500:
           $ref: "#/responses/500"
       security:
-       - basicAuth: []
-          
+        - basicAuth: []
+
     post:
       summary: "Create a list for the connected user"
       operationId: "createList"
@@ -150,7 +150,7 @@ paths:
         500:
           $ref: "#/responses/500"
       security:
-       - basicAuth: []
+        - basicAuth: []
   /lists/{list_id}:
     put:
       operationId: "updateList"
@@ -191,7 +191,7 @@ paths:
         500:
           $ref: "#/responses/500"
       security:
-       - basicAuth: []
+        - basicAuth: []
     delete:
       summary: "Delete a list for the connected user"
       tags:
@@ -216,8 +216,8 @@ paths:
         500:
           $ref: "#/responses/500"
       security:
-       - basicAuth: []
-          
+        - basicAuth: []
+
   /lists/{list_id}/items:
     get:
       summary: "Fetch all the connected user items of a certain list"
@@ -240,14 +240,14 @@ paths:
           description: "Success"
           schema:
             type: "array"
-            items:          
+            items:
               $ref: "#/definitions/Item"
         401:
           $ref: "#/responses/401"
         500:
           $ref: "#/responses/500"
       security:
-       - basicAuth: []
+        - basicAuth: []
     post:
       summary: "Add an Item to a specific list for the user"
       operationId: "createItemInList"
@@ -289,7 +289,7 @@ paths:
         500:
           $ref: "#/responses/500"
       security:
-       - basicAuth: []
+        - basicAuth: []
     put:
       summary: "Update an Item of a specific list for the user"
       operationId: "updateItemOfList"
@@ -339,7 +339,7 @@ paths:
         500:
           $ref: "#/responses/500"
       security:
-       - basicAuth: []
+        - basicAuth: []
     delete:
       summary: "Delete an Item of a specific list for the user"
       operationId: "DeleteItemOfList"
@@ -365,8 +365,8 @@ paths:
         500:
           $ref: "#/responses/500"
       security:
-       - basicAuth: []
-  
+        - basicAuth: []
+
   /items:
     get:
       summary: "Fetch all the connected user items"
@@ -387,8 +387,8 @@ paths:
         500:
           $ref: "#/responses/500"
       security:
-       - basicAuth: []
-          
+        - basicAuth: []
+
     post:
       summary: "Create an Item for the connected user"
       operationId: "createItem"
@@ -430,7 +430,7 @@ paths:
         500:
           $ref: "#/responses/500"
       security:
-       - basicAuth: []
+        - basicAuth: []
   /items/{item_id}:
     put:
       summary: "Update an Item of a user"
@@ -479,7 +479,7 @@ paths:
         500:
           $ref: "#/responses/500"
       security:
-       - basicAuth: []
+        - basicAuth: []
     delete:
       summary: "Delete an Item of a user"
       operationId: "DeleteItem"
@@ -505,7 +505,7 @@ paths:
         500:
           $ref: "#/responses/500"
       security:
-       - basicAuth: []
+        - basicAuth: []
   /categories:
     get:
       summary: "Fetch all the connected user categories"
@@ -526,8 +526,8 @@ paths:
         500:
           $ref: "#/responses/500"
       security:
-       - basicAuth: []
-          
+        - basicAuth: []
+
     post:
       summary: "Create a Category for the connected user"
       operationId: "crateCategory"
@@ -560,7 +560,7 @@ paths:
         500:
           $ref: "#/responses/500"
       security:
-       - basicAuth: []
+        - basicAuth: []
   /categories/{category_id}:
     put:
       summary: "Update a Category of a user"
@@ -600,7 +600,7 @@ paths:
         500:
           $ref: "#/responses/500"
       security:
-       - basicAuth: []
+        - basicAuth: []
     delete:
       summary: "Delete a Category of a user"
       operationId: "deleteCategory"
@@ -626,12 +626,12 @@ paths:
         500:
           $ref: "#/responses/500"
       security:
-       - basicAuth: []
-       
+        - basicAuth: []
+
 securityDefinitions:
   basicAuth:
     type: basic
-    
+
 responses:
   400:
     description: Bad Request
@@ -667,13 +667,13 @@ definitions:
     type: "object"
     properties:
       user:
-       type: "object"
-       example:
-        $ref: "#/definitions/User"
+        type: "object"
+        example:
+          $ref: "#/definitions/User"
       token:
         type: "string"
         example: "qlkjyzqsd325.!qspuezappz"
-            
+
   User:
     type: "object"
     properties:
@@ -686,7 +686,7 @@ definitions:
       userName:
         type: "string"
         example: "Username123"
-        
+
   List:
     type: "object"
     properties:
@@ -700,12 +700,12 @@ definitions:
         type: "string"
       updated_at:
         type: "string"
-        
+
   ListArray:
     type: "array"
     items:
       $ref: "#/definitions/List"
-      
+
   Item:
     type: "object"
     properties:
@@ -725,7 +725,7 @@ definitions:
         type: "string"
       updated_at:
         type: "string"
-        
+
   Category:
     type: "object"
     properties:
@@ -744,7 +744,7 @@ definitions:
       updated_at:
         type: "string"
         example: "2020-09-02T14:48:41.919Z"
-        
+
   Error:
     type: "object"
     properties:
@@ -764,4 +764,3 @@ definitions:
         type: "string"
       message:
         type: "string"
-  
