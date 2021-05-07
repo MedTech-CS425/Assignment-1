@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
+
 var userSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -16,7 +17,6 @@ var userSchema = new mongoose.Schema({
   username: {
     type: String,
     required: "username can't be empty",
-    unique: true,
   },
   saltSecret: String,
 });

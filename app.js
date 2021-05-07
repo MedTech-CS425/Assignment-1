@@ -1,5 +1,6 @@
 require('./config/config');
 require('./config/passportConfig');
+const { handleError } = require('./helpers/error')
 
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config()
@@ -22,6 +23,9 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use('/api', rtsIndex);
 app.use(passport.initialize());
+app.use((err, req, res, next) => {
+  handleError(err, res);
+});
   
 app.listen(process.env.PORT || 3000)
 
