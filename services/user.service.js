@@ -8,7 +8,7 @@ module.exports={
     login: async (email,password)=>{
         const user=await User.findOne({email: email});
         if(user){
-            console.log("user exists");
+            
         
             let match=await bcrypt.compare(password,user.password);
            
@@ -22,10 +22,12 @@ module.exports={
               
 
                return reponse;
-            }else
-                throw new Error(401);
+            }
+               
             
         }
+         throw new Error(401);
+    
     },
     register: async (userInfo)=>{
         const result=await User.findOne({email:userInfo.email});

@@ -5,10 +5,14 @@ const router = Router({
     mergeParams: true
   });
 router.post("/login",async (req,res)=>{
+  try {
   const result=await userService.login(req.body.email,req.body.password);
   if(result)
   res.status(201).send(result);
-  console.log(result);
+  } catch (error) {
+    res.send(error);
+  }
+  
   
 })
 router.post("/register",async (req,res)=>{
@@ -16,7 +20,7 @@ router.post("/register",async (req,res)=>{
     await userService.register({email:req.body.email,password:req.body.password,userName:req.body.userName})
     res.sendStatus(201);
   } catch (error) {
-    console.log(error);
+    res.send(error);
   }
   
 })
@@ -26,7 +30,7 @@ router.get("/getUser",verifyToken,async(req,res)=>{
       const result=await userService.getUser(req.decodedToken.id);
       res.status(200).send(result);
   } catch (error) {
-    res.sendStatus(401);
+    res.send(error);
   }
 })
 module.exports=router;
