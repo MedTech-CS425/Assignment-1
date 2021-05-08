@@ -1,0 +1,28 @@
+{
+  "name": "Assignment-1",
+  "version": "1.0.0",
+  "description": "In this Assignment You need to code your own server using ExpressJS.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "start:dev": "nodemon index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaykay9999/Assignment-1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jaykay9999/Assignment-1/issues"
+  },
+  "homepage": "https://github.com/jaykay9999/Assignment-1#readme",
+  "dependencies": {
+    "app": "^0.1.0",
+    "bcrypt": "^5.0.1",
+    "express": "^4.17.1",
+    "json": "^11.0.0",
+    "mongoose": "^5.12.7"
+  }
+}
