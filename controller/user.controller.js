@@ -9,7 +9,7 @@ module.exports.signup = async (req, res, next) => {
     const user = await User.findOne({email: req.body.email})
     if(user){
       throw new ErrorHandler(422, "duplicate e-mail adress")
-    }
+  }
     res.status(201).json(await User.create(req.body))
   }
   catch (error) {
@@ -51,5 +51,5 @@ module.exports.getUser = (req, res, next) => {
 }catch(error){
   if(error.status===500) error = new ErrorHandler(500,"Internal server error") 
     next(error)
-}
+ }
 }

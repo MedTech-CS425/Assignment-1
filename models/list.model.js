@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 
 var listSchema = new mongoose.Schema({
+  id:{
+    type: Number
+  },
   name: {
     type: String,
     required: "name can't be empty",
